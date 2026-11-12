@@ -1,0 +1,16 @@
+allow toolbox self:capability kill;
+
+# Recovery: init.recovery.qcom.rc writes the dwc3 role file
+# (/sys/devices/platform/soc/a600000.ssusb/mode). The vendor genfs labels are
+# not part of the recovery policy, so the file is plain sysfs there, which
+# init may never write (neverallow). Give it its own type in recovery. Without that write the controller never enters device
+# mode and the PC only sees the EUD hub (05C6:9501).
+recovery_only(`
+type sysfs_usb_role_recovery, fs_type, sysfs_type;
+allow init sysfs_usb_role_recovery:file w_file_perms;
+')
+
+# Recovery: init writes the bootloader message to misc for "reboot recovery".
+recovery_only(`
+allow init misc_block_device:blk_file w_file_perms;
+')

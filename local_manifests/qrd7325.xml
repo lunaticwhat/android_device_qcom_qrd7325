@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote name="qrd-development" fetch="https://github.com/QRD-Development" />
+
+    <!-- Kernel source: used for headers now, and built from in Stage 2 -->
+    <project path="kernel/qcom/lahaina"
+             name="android_kernel_qcom_sm8350"
+             remote="qrd-development"
+             revision="lineage-21"
+             clone-depth="1" />
+</manifest>

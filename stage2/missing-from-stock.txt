@@ -1,0 +1,79 @@
+# Entries of the reference list that are NOT in the stock QRD7325 dump.
+# Most are newer interface versions (GNSS 4.3, IMS 1.8/1.9, qtiradio 2.7) or
+# QSSI 14 system_ext/product apps that an Android 11 dump cannot contain.
+
+vendor/etc/acdbdata/nn_ns_models/fai__4.8.8_0.0__3.0.0_0.0__3.1.2_0.0__3.2.0_0.1__eai_1.10.pmd	# ACDBs
+vendor/lib/rfsa/adsp/libhexagon_nn_skel.so	# ADSP modules
+system_ext/bin/tcmd	# DPM
+system_ext/etc/init/tcmd.rc	# DPM
+system_ext/etc/seccomp_policy/tcmd.policy	# DPM
+system_ext/lib64/vendor.qti.hardware.dpmaidlservice-V1-ndk.so	# DPM
+system_ext/lib64/vendor.qti.hardware.dpmservice@1.0.so	# DPM
+vendor/etc/vintf/manifest/vendor.qti.gnss@4.3-service.xml	# GNSS
+vendor/lib64/hw/vendor.qti.gnss@4.3-impl.so	# GNSS
+vendor/lib64/libloc_qwes_iface.so	# GNSS
+vendor/lib64/libloc_ril_client.so	# GNSS
+vendor/lib64/vendor.qti.gnss@4.1.so	# GNSS
+vendor/lib64/vendor.qti.gnss@4.2.so	# GNSS
+vendor/lib64/vendor.qti.gnss@4.3-service.so	# GNSS
+vendor/lib64/vendor.qti.gnss@4.3.so	# GNSS
+system_ext/app/ImsRcsService/ImsRcsService.apk	# IMS
+system_ext/app/QtiTelephony/QtiTelephony.apk	# IMS
+system_ext/etc/permissions/vendor.qti.ims.rcsservice.xml	# IMS
+system_ext/framework/vendor.qti.ims.connection-V1.0-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.factory-V2.0-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.factory-V2.1-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.factory-V2.2-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.rcssip-V1.0-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.rcssip-V1.1-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.rcssip-V1.2-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.rcsuce-V1.0-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.rcsuce-V1.1-java.jar	# IMS
+system_ext/framework/vendor.qti.ims.rcsuce-V1.2-java.jar	# IMS
+system_ext/lib64/vendor.qti.ImsRtpService-V1-ndk.so	# IMS
+system_ext/lib64/vendor.qti.imsrtpservice@3.1.so	# IMS
+vendor/lib64/vendor.qti.hardware.radio.ims@1.8.so	# IMS
+vendor/lib64/vendor.qti.hardware.radio.ims@1.9.so	# IMS
+vendor/lib64/libhexagon_nn_stub.so	# Neural networks
+vendor/lib64/unnhal-acc-adreno.so	# Neural networks
+vendor/lib64/unnhal-acc-hvx.so	# Neural networks
+system_ext/app/PowerOffAlarm/PowerOffAlarm.apk	# Power-off alarm
+system_ext/bin/qccsyshal@1.2-service	# QCC
+system_ext/etc/init/vendor.qti.hardware.qccsyshal@1.2-service.rc	# QCC
+system_ext/etc/permissions/com.qti.qcc.vendor_qcc.xml	# QCC
+system_ext/lib64/libqccfileservice.so	# QCC
+system_ext/lib64/libqccdme.so	# QCC
+system_ext/lib64/vendor.qti.hardware.qccsyshal@1.1.so	# QCC
+system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so	# QCC
+system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2.so	# QCC
+system_ext/lib64/vendor.qti.qccvndhal_aidl-V1-ndk.so	# QCC
+product/app/uimgbaservice/uimgbaservice.apk	# RIL
+product/etc/permissions/UimGba.xml	# RIL
+product/etc/permissions/UimGbaManager.xml	# RIL
+product/etc/permissions/UimService.xml	# RIL
+product/framework/uimgbalibrary.jar	# RIL
+product/framework/uimgbamanagerlibrary.jar	# RIL
+product/framework/uimservicelibrary.jar	# RIL
+vendor/etc/permissions/noRil/apq_excluded_telephony_features.xml	# RIL
+vendor/etc/qcril_database/upgrade/config/12.0_config.sql	# RIL
+vendor/etc/qcril_database/upgrade/config/13.0_config.sql	# RIL
+vendor/etc/qcril_database/upgrade/other/12_version_update_ecc_table.sql	# RIL
+vendor/etc/telephony_packages.xml	# RIL
+vendor/lib64/qcril_client.so	# RIL
+vendor/lib64/vendor.qti.hardware.radio.qtiradio@2.7.so	# RIL
+vendor/lib64/vendor.qti.ims.configservice@1.0.so	# RIL
+vendor/lib64/vendor.qti.ims.configservice@1.1.so	# RIL
+vendor/lib64/vendor.qti.ims.connection@1.0.so	# RIL
+vendor/lib64/vendor.qti.ims.factory@2.0.so	# RIL
+vendor/lib64/vendor.qti.ims.factory@2.1.so	# RIL
+vendor/lib64/vendor.qti.ims.factory@2.2.so	# RIL
+vendor/lib64/vendor.qti.ims.rcssip@1.0.so	# RIL
+vendor/lib64/vendor.qti.ims.rcssip@1.1.so	# RIL
+vendor/lib64/vendor.qti.ims.rcssip@1.2.so	# RIL
+vendor/lib64/vendor.qti.ims.rcsuce@1.0.so	# RIL
+vendor/lib64/vendor.qti.ims.rcsuce@1.1.so	# RIL
+vendor/lib64/vendor.qti.ims.rcsuce@1.2.so	# RIL
+vendor/lib64/libesepmconfig.so	# Secure element
+vendor/lib64/libesesbprovision.so	# Secure element
+vendor/etc/sensors/proto/sns_formatter_notify.proto	# Sensor Config
+system/framework/WfdCommon.jar	# WiFi Display

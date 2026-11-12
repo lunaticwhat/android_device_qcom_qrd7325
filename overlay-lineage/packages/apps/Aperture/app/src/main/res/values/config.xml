@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     QRD7325 rear cameras (stock Android 11 camx HAL):
+       0 = main 4.71mm, 2 = ultrawide 2.24mm, 3 = tele 6.0mm,
+       4 = logical multi-camera (2+0+3). Front = 1.
+     Expose the physical rear lenses to Aperture and hide the logical one,
+     so the lens buttons switch cameras instead of only showing 1x.
+-->
+<resources>
+    <bool name="config_enableAuxCameras">true</bool>
+    <string-array name="config_ignoredAuxCameraIds" translatable="false">
+        <item>4</item>
+    </string-array>
+</resources>

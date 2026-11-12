@@ -1,0 +1,37 @@
+# Qualcomm IMS (org.codeaurora.ims, stock system_ext priv-app).
+#
+# On the stock Android 11 build this app runs in vendor_qtelephony, a
+# system_ext domain. The stock vendor policy (VNDK 30) grants the IMS HAL,
+# imsrtp and vendor radio/ims property access to vendor_qtelephony_30_0;
+# prebuilt/sepolicy/system_ext_mapping_30.0.cil maps that attribute back onto
+# this type. Without it the app runs as platform_app, is denied by the vendor
+# side, and the ImsService never comes up (no VoLTE toggle).
+type vendor_qtelephony, domain, coredomain;
+app_domain(vendor_qtelephony)
+net_domain(vendor_qtelephony)
+binder_service(vendor_qtelephony)
+hwbinder_use(vendor_qtelephony)
+get_prop(vendor_qtelephony, hwservicemanager_prop)
+hal_client_domain(vendor_qtelephony, hal_telephony)
+
+allow vendor_qtelephony {
+    app_api_service
+    audioserver_service
+    cameraserver_service
+    drmserver_service
+    mediaextractor_service
+    mediametrics_service
+    mediaserver_service
+    radio_service
+    system_api_service
+}:service_manager find;
+
+# Bound by the phone process (ImsResolver) and talks back to it.
+binder_call(vendor_qtelephony, radio)
+binder_call(radio, vendor_qtelephony)
+binder_call(vendor_qtelephony, system_server)
+binder_call(system_server, vendor_qtelephony)
+
+# Own data (seapp type=app_data_file).
+allow vendor_qtelephony app_data_file:dir create_dir_perms;
+allow vendor_qtelephony app_data_file:{ file lnk_file } create_file_perms;

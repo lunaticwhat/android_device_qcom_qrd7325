@@ -1,0 +1,4 @@
+# Recovery only: the dwc3 role file, written by init.recovery.qcom.rc
+recovery_only(`
+genfscon sysfs /devices/platform/soc/a600000.ssusb/mode u:object_r:sysfs_usb_role_recovery:s0
+')

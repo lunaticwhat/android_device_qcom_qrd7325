@@ -1,0 +1,18 @@
+# Audio
+af.fast_track_multiplier=1
+audio.deep_buffer.media=true
+audio.offload.min.duration.secs=30
+audio.offload.video=true
+ro.af.client_heap_size_kbyte=7168
+
+# Camera
+ro.camerax.extensions.enabled=true
+
+# LMK
+ro.lmk.filecache_min_kb=153600
+ro.lmk.kill_heaviest_task=true
+ro.lmk.kill_timeout_ms=15
+ro.lmk.stall_limit_critical=40
+
+# Thermal
+persist.vendor.thermal.config=/vendor/etc/thermal-engine.conf
