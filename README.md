@@ -1,5 +1,7 @@
 # LineageOS 21 device tree for Qualcomm QRD7325 (SM7325 "Yupik")
 
+EVERYTHING IS AI SLOP BUT IT WORKED WELL. I DIDN'T EVEN WRITE A SINGLE LINE OF CODE
+
 Path in the source tree: `device/qcom/qrd7325`
 Product: `lineage_qrd7325`
 
