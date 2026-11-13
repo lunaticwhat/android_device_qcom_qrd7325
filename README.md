@@ -87,6 +87,22 @@ Settings hid every 5G entry. Set to `26,26` (NR/LTE/GSM/WCDMA) for both SIM slot
   `prebuilt/sepolicy/system_ext_mapping_30.0.cil` installed as
   `system_ext/etc/selinux/mapping/30.0.cil`.
 
+### Display: refresh rate
+- The panel (Visionox r66451, C-PHY command mode) has three fixed modes: 60, 120 and
+  144 Hz. It is not LTPO.
+- The AOSP "Smooth display" on/off switch is hidden (`config_show_smooth_display`) and
+  LineageOS's peak refresh rate list is shown instead
+  (`config_show_peak_refresh_rate_switch`), so every mode can be picked.
+- `config_defaultPeakRefreshRate` is 144, so 144 Hz is the default.
+
+### GApps
+- MindTheGapps installs from recovery fine, but with dm-verity enforced on
+  system/product/system_ext the new blocks fail verification at boot and PackageManager
+  silently drops the apps. vbmeta is now built with verification off
+  (`BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3`), as on official LineageOS devices.
+- Install order on this A/B device: sideload the ROM, **Advanced > Reboot to recovery**,
+  sideload GApps (answer **Yes** to the signature prompt), then **Format data**.
+
 ### Known limitations
 - **VoNR:** not possible with this vendor. VoNR needs the AIDL radio HAL (voice 2.0);
   the Android 11 vendor only has radio HAL 1.x.
@@ -162,6 +178,8 @@ In LineageOS Recovery:
 1. Choose **Factory reset > Format data / factory reset**.
 2. Choose **Apply update > Apply from ADB**.
 3. On the PC, run `adb sideload lineage-21.0-*-UNOFFICIAL-qrd7325.zip`.
+4. Optional GApps: choose **Advanced > Reboot to recovery**, then **Apply update > Apply
+   from ADB** and sideload MindTheGapps 14 (arm64). Format data again before first boot.
 
 To go back to stock, use your `partition_backup` images: `super`, `boot`, `vendor_boot`, `dtbo` and `vbmeta`.
 
