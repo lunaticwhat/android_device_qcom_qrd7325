@@ -1,0 +1,38 @@
+--- a/system/gd/hci/controller.cc	2026-11-14 03:57:08.813380929 +0700
++++ b/system/gd/hci/controller.cc	2026-11-14 03:57:50.766551605 +0700
+@@ -94,7 +94,12 @@
+           handler->BindOnceOn(this, &Controller::impl::set_min_encryption_key_size_handler));
+     }
+ 
+-    if (is_supported(OpCode::LE_READ_BUFFER_SIZE_V2)) {
++    // Some Qualcomm controllers (e.g. WCN6750 on the QRD7325 stock firmware) list
++    // LE Read Buffer Size V2 as supported but reject it. Only use V2 when the
++    // controller also reports isochronous (CIS/BIS) support, otherwise use V1.
++    constexpr uint64_t kIsoFeatureMask = (1ULL << 28) | (1ULL << 29) | (1ULL << 30) | (1ULL << 31);
++    if (is_supported(OpCode::LE_READ_BUFFER_SIZE_V2) &&
++        (le_local_supported_features_ & kIsoFeatureMask) != 0) {
+       hci_->EnqueueCommand(
+           LeReadBufferSizeV2Builder::Create(),
+           handler->BindOnceOn(this, &Controller::impl::le_read_buffer_size_v2_handler));
+@@ -404,11 +409,16 @@
+ 
+   void le_read_buffer_size_v2_handler(CommandCompleteView view) {
+     auto complete_view = LeReadBufferSizeV2CompleteView::Create(view);
+-    ASSERT(complete_view.IsValid());
+-    ErrorCode status = complete_view.GetStatus();
+-    ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
+-    le_buffer_size_ = complete_view.GetLeBufferSize();
+-    iso_buffer_size_ = complete_view.GetIsoBufferSize();
++    if (!complete_view.IsValid() || complete_view.GetStatus() != ErrorCode::SUCCESS) {
++      // Controller advertised V2 but rejected it: fall back to sharing the
++      // BR/EDR ACL buffers with LE instead of aborting the stack.
++      LOG_WARN("LE Read Buffer Size V2 rejected by controller, sharing ACL buffers with LE");
++      le_buffer_size_.le_data_packet_length_ = 0;
++      le_buffer_size_.total_num_le_packets_ = 0;
++    } else {
++      le_buffer_size_ = complete_view.GetLeBufferSize();
++      iso_buffer_size_ = complete_view.GetIsoBufferSize();
++    }
+ 
+     // If LE buffer size is zero, then buffers returned by Read_Buffer_Size are shared between BR/EDR and LE.
+     if (le_buffer_size_.total_num_le_packets_ == 0) {

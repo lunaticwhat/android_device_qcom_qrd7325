@@ -103,6 +103,17 @@ Settings hid every 5G entry. Set to `26,26` (NR/LTE/GSM/WCDMA) for both SIM slot
 - Install order on this A/B device: sideload the ROM, **Advanced > Reboot to recovery**,
   sideload GApps (answer **Yes** to the signature prompt), then **Format data**.
 
+### Bluetooth: turning it on crashed the Bluetooth app
+- The WCN6750 ("moselle") on the stock Android 11 firmware lists *LE Read Buffer Size V2*
+  as supported but rejects it. Android 14's stack asserts on the reply
+  (`le_read_buffer_size_v2_handler: complete_view.IsValid()`) and `com.android.bluetooth`
+  aborts, so Bluetooth never turns on.
+- Fixed in `packages/modules/Bluetooth` (outside this tree): only use V2 when the
+  controller reports isochronous (CIS/BIS) support, and fall back to shared ACL buffers
+  instead of aborting if V2 is rejected. Apply
+  `patches/packages/modules/Bluetooth/0001-controller-le-read-buffer-size-v2-fallback.patch`
+  with `git -C packages/modules/Bluetooth apply` before building.
+
 ### Known limitations
 - **VoNR:** not possible with this vendor. VoNR needs the AIDL radio HAL (voice 2.0);
   the Android 11 vendor only has radio HAL 1.x.
